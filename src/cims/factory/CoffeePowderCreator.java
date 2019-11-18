@@ -20,7 +20,7 @@ public class CoffeePowderCreator extends CoffeeFactory {
 //		for(String s : in) {
 //			System.out.println(s);
 //		}
-		return new CoffeePowder(Integer.parseInt(in[0]),in[1],Double.parseDouble(in[2]));
+		return new CoffeePowder(in[1], Integer.parseInt(in[0]), Double.parseDouble(in[2]));
 	}
 
 }

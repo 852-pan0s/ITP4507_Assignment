@@ -1,28 +1,19 @@
 package cims.command;
 
 import java.util.Scanner;
-import java.util.Stack;
 import java.util.Vector;
 
 import cims.CIMSTool;
 import cims.CoffeeProduct;
-import cims.memoento.Memoento;
 
 public class ViewCommand implements Command {
-	Stack<String> doneList;
-	Stack<Memoento> save = new Stack<Memoento>();
-	Stack<CoffeeProduct> sProdusts;
-	Vector<CoffeeProduct> vProducts;
+
+	Vector<CoffeeProduct> products;
 	Scanner sc;
-	
-	
-	public ViewCommand(Stack<String> doneList, Stack<Memoento> save, Stack<CoffeeProduct> sProdusts,
-			Vector<CoffeeProduct> vProducts, Scanner sc) {
+
+	public ViewCommand(Vector<CoffeeProduct> products, Scanner sc) {
 		super();
-		this.doneList = doneList;
-		this.save = save;
-		this.sProdusts = sProdusts;
-		this.vProducts = vProducts;
+		this.products = products;
 		this.sc = sc;
 	}
 
@@ -34,21 +25,19 @@ public class ViewCommand implements Command {
 		if (in.equals("*")) {
 			CIMSTool.isPrintAll = true;
 			System.out.println("\nCoffee Product information: ");
-			System.out.println("ID\tName\t\tQuantity\tOther Info");
-			for (CoffeeProduct cp : vProducts) {
+			System.out.println("ID\tName\t\t\tQuantity\tOther Info");
+			for (CoffeeProduct cp : products) {
 				System.out.println(cp.toString());
 			}
 		} else {
 			CIMSTool.isPrintAll = false;
-			for (CoffeeProduct cp : vProducts) {
+			for (CoffeeProduct cp : products) {
 				if (cp.getProductID() == Integer.parseInt(in)) {
 					System.out.println("\nProuct information: ");
 					System.out.println(cp.toString());
 				}
 			}
 		}
-		System.out.println();
-
 	}
 
 	@Override
@@ -60,7 +49,7 @@ public class ViewCommand implements Command {
 	@Override
 	public void redo() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

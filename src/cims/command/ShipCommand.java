@@ -7,14 +7,14 @@ import java.util.Vector;
 import cims.CoffeeProduct;
 import cims.memoento.Memoento;
 
-public class CollectCommand implements Command {
+public class ShipCommand implements Command {
 	Stack<String> undoList;
 	Stack<Memoento> undoSaves;
 	Stack<CoffeeProduct> undoProducts;
 	Vector<CoffeeProduct> products;
 	Scanner sc;
 
-	public CollectCommand(Stack<String> undoList, Stack<Memoento> undoSaves, Stack<CoffeeProduct> undoProducts,
+	public ShipCommand(Stack<String> undoList, Stack<Memoento> undoSaves, Stack<CoffeeProduct> undoProducts,
 			Vector<CoffeeProduct> products, Scanner sc) {
 		super();
 		this.undoList = undoList;
@@ -31,18 +31,22 @@ public class CollectCommand implements Command {
 		String in = sc.nextLine();
 		for (CoffeeProduct cp : products) {
 			if (cp.getProductID() == Integer.parseInt(in)) {
-				System.out.println("Quantity of deposit:");
+				System.out.println("Quantity to ship:");
 				in = sc.nextLine();
-//				undoSaves.push(new Memoento(cp));
-				cp.setQty(cp.getQty() + Integer.parseInt(in));
-				undoSaves.push(new Memoento(cp));
-				undoList.push(String.format("Received %s %s (%d) ", in, cp.getName(), cp.getProductID()));
-				System.out.println(String.format("Received %s packs of %s. Current quantity is %d.", in, cp.getName(),
-						cp.getQty()));
-				break;
+				if (cp.getQty() >= Integer.parseInt(in)) {
+					cp.setQty(cp.getQty() - Integer.parseInt(in));
+					undoSaves.push(new Memoento(cp));
+					undoList.push(String.format("Shipped %s %s (%d) ", in, cp.getName(), cp.getProductID()));
+					System.out.println(String.format("Shipped %s packs of %s. Current quantity is %d.", in,
+							cp.getName(), cp.getQty()));
+					break;
+				} else {
+					System.out.println(
+							"Invalid quantity (current balance is less than required quantity). Try again!!!");
+				}
+
 			}
 		}
-
 	}
 
 	@Override

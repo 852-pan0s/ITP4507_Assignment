@@ -2,12 +2,12 @@ package cims.factory;
 
 import java.util.Scanner;
 
-import cims.CoffeeCandy;
+import cims.CoffeeMug;
 import cims.CoffeeProduct;
 
-public class CoffeeCandyCreator extends CoffeeFactory {
+public class CoffeeMugCreator extends CoffeeFactory {
 
-	public CoffeeCandyCreator(Scanner sc) {
+	public CoffeeMugCreator(Scanner sc) {
 		super(sc);
 		// TODO Auto-generated constructor stub
 	}
@@ -15,12 +15,12 @@ public class CoffeeCandyCreator extends CoffeeFactory {
 	@Override
 	public CoffeeProduct create() {
 		// TODO Auto-generated method stub
-		System.out.println("Enter product Id, name, number of candy and calories per candy:");
+		System.out.println("Enter product Id, name, size and weight:");
 		String[] in = sc.nextLine().split(", ");
 //		for (String s : in) {
 //			System.out.println(s);
 //		}
-		return new CoffeeCandy(in[1], Integer.parseInt(in[0]), Integer.parseInt(in[2]), Integer.parseInt(in[3]));
+		return new CoffeeMug(in[1],Integer.parseInt(in[0]), in[2], Double.parseDouble(in[3]));
 	}
 
 }

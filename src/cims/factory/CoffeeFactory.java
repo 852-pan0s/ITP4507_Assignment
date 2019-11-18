@@ -6,7 +6,7 @@ import cims.CoffeeProduct;
 
 public abstract class CoffeeFactory {
 	Scanner sc;
-	
+
 	public CoffeeFactory(Scanner sc) {
 		this.sc = sc;
 	}

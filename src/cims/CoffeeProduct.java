@@ -1,8 +1,8 @@
 package cims;
 
 public class CoffeeProduct {
-	private String name;
 	private int productID;
+	private String name;
 	private int qty;
 
 	public CoffeeProduct(String name, int productID) {
@@ -14,8 +14,9 @@ public class CoffeeProduct {
 	public String toString() {
 		String s = "";
 		if (CIMSTool.isPrintAll) {
-			s = String.format("%d\t%s\t%d", productID, name, qty);
-		}else {
+			String t = name.length() > 15 ? "\t" : "\t\t";
+			s = String.format("%d\t%s%s%d", productID, name, t, qty);
+		} else {
 			s = String.format("ID: %d\nName: %s\nQuantity: %d", productID, name, qty);
 		}
 		return s;

@@ -10,21 +10,19 @@ import cims.memoento.Memoento;
 
 public class AddCommand implements Command {
 
-	Stack<String> doneList;
-	Stack<Memoento> save = new Stack<Memoento>();
-	Stack<CoffeeProduct> sProdusts;
-	Vector<CoffeeProduct> vProducts;
+	Stack<String> undoList;
+	Stack<Memoento> undoSaves;
+	Stack<CoffeeProduct> undoProducts;
+	Vector<CoffeeProduct> products;
 	Scanner sc;
 
-	
-
-	public AddCommand(Stack<String> doneList, Stack<Memoento> save, Stack<CoffeeProduct> sProdusts,
-			Vector<CoffeeProduct> vProducts, Scanner sc) {
+	public AddCommand(Stack<String> undoList, Stack<Memoento> undoSaves, Stack<CoffeeProduct> undoProducts,
+			Vector<CoffeeProduct> products, Scanner sc) {
 		super();
-		this.doneList = doneList;
-		this.save = save;
-		this.sProdusts = sProdusts;
-		this.vProducts = vProducts;
+		this.undoList = undoList;
+		this.undoSaves = undoSaves;
+		this.undoProducts = undoProducts;
+		this.products = products;
 		this.sc = sc;
 	}
 
@@ -32,21 +30,27 @@ public class AddCommand implements Command {
 	public void execute() {
 		// TODO Auto-generated method stub
 		CoffeeFactory cf = null;
-		
-		System.out.println("Enter Coffee type (cc=Coffee Candy/cp=Coffee Powder):");
+
+		System.out.println("Enter Coffee type (cc=Coffee Candy/cp=Coffee Powder/cm=Coffee Mug):");
 		String in = sc.nextLine();
 		if (in.equals("cc")) {
 			cf = new CoffeeCandyCreator(sc);
 		} else if (in.equals("cp")) {
 			cf = new CoffeePowderCreator(sc);
-		} else {
-			System.out.println("");
+		} else if (in.equals("cm")) {
+			cf = new CoffeeMugCreator(sc);
 		}
-		CoffeeProduct cp = cf.create();;
-		sProdusts.push(cp);
-		vProducts.add(cp);
-		doneList.push(String.format("Added %d %s", cp.getProductID(),cp.getName()));
-		
+		else {
+			System.out.println("No such type");
+			return;
+		}
+		CoffeeProduct cp = cf.create();
+		undoProducts.push(cp);
+		undoSaves.push(new Memoento(cp));
+		products.add(cp);
+		undoList.push(String.format("Added %d %s", cp.getProductID(), cp.getName()));
+		System.out.println("New product record created.");
+
 	}
 
 	@Override
@@ -58,7 +62,7 @@ public class AddCommand implements Command {
 	@Override
 	public void redo() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
