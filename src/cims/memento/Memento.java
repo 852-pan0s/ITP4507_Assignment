@@ -1,14 +1,14 @@
-package cims.memoento;
+package cims.memento;
 
 import cims.CoffeeProduct;
 
-public class Memoento {
+public class Memento {
 	CoffeeProduct cp;
 	private String name;
 	private int productID;
 	private int qty;
 
-	public Memoento(CoffeeProduct cp) {
+	public Memento(CoffeeProduct cp) {
 		this.cp = cp;
 		name = cp.getName();
 		productID = cp.getProductID();
