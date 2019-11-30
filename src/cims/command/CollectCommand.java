@@ -2,7 +2,6 @@ package cims.command;
 
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.Vector;
 
 import cims.CoffeeProduct;
 import cims.memento.Memento;
@@ -10,15 +9,15 @@ import cims.memento.Memento;
 public class CollectCommand implements Command {
 	private Stack<String> undoList;
 	private Stack<Memento> undoStatus;
-	private Vector<CoffeeProduct> products;
+	private Stack<CoffeeProduct> undoProducts;
 	private Scanner sc;
 
-	public CollectCommand(Stack<String> undoList, Stack<Memento> undoStatus, Vector<CoffeeProduct> products,
+	public CollectCommand(Stack<String> undoList, Stack<Memento> undoStatus, Stack<CoffeeProduct> undoProducts,
 			Scanner sc) {
 		super();
 		this.undoList = undoList;
 		this.undoStatus = undoStatus;
-		this.products = products;
+		this.undoProducts = undoProducts;
 		this.sc = sc;
 	}
 
@@ -27,7 +26,7 @@ public class CollectCommand implements Command {
 		// TODO Auto-generated method stub
 		System.out.println("Enter code:");
 		String in = sc.nextLine();
-		for (CoffeeProduct cp : products) {
+		for (CoffeeProduct cp : undoProducts) {
 			if (cp.getProductID() == Integer.parseInt(in)) {
 				System.out.println("Quantity of deposit:");
 				in = sc.nextLine();

@@ -2,7 +2,6 @@ package cims;
 
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.Vector;
 
 import cims.command.*;
 import cims.memento.Memento;
@@ -28,22 +27,21 @@ public class CIMSTool {
 		Stack<Memento> redoStatus = new Stack<Memento>();
 		Stack<CoffeeProduct> undoProducts = new Stack<CoffeeProduct>();
 		Stack<CoffeeProduct> redoProducts = new Stack<CoffeeProduct>();
-		Vector<CoffeeProduct> products = new Vector<CoffeeProduct>();
 		while (true) {
 			showChoices();
 			input = sc.nextLine();
 			if (input.equals("a")) {
-				c = new AddCommand(undoList, undoStatus, undoProducts, products, sc);
+				c = new AddCommand(undoList, undoStatus, undoProducts, sc);
 			} else if (input.equals("v")) {
-				c = new ViewCommand(products, sc);
+				c = new ViewCommand(undoProducts, sc);
 			} else if (input.equals("c")) {
-				c = new CollectCommand(undoList, undoStatus, products, sc);
+				c = new CollectCommand(undoList, undoStatus, undoProducts, sc);
 			} else if (input.equals("s")) {
-				c = new ShipCommand(undoList, undoStatus, products, sc);
+				c = new ShipCommand(undoList, undoStatus, undoProducts, sc);
 			} else if (input.equals("u")) {
-				c = new UndoCommand(undoList, redoList, undoStatus, redoStatus, undoProducts, redoProducts, products);
+				c = new UndoCommand(undoList, redoList, undoStatus, redoStatus, undoProducts, redoProducts);
 			} else if (input.equals("r")) {
-				c = new RedoCommand(undoList, redoList, undoStatus, redoStatus, undoProducts, redoProducts, products);
+				c = new RedoCommand(undoList, redoList, undoStatus, redoStatus, undoProducts, redoProducts);
 			} else if (input.equals("sl")) {
 				c = new ShowListCommand(undoList, redoList);
 			} else if (input.equals("x")) {

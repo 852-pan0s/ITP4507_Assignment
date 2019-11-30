@@ -1,19 +1,19 @@
 package cims.command;
 
 import java.util.Scanner;
-import java.util.Vector;
+import java.util.Stack;
 
 import cims.CIMSTool;
 import cims.CoffeeProduct;
 
 public class ViewCommand implements Command {
 
-	private Vector<CoffeeProduct> products;
+	private Stack<CoffeeProduct> undoProducts;
 	private Scanner sc;
 
-	public ViewCommand(Vector<CoffeeProduct> products, Scanner sc) {
+	public ViewCommand(Stack<CoffeeProduct> undoProducts, Scanner sc) {
 		super();
-		this.products = products;
+		this.undoProducts = undoProducts;
 		this.sc = sc;
 	}
 
@@ -26,12 +26,12 @@ public class ViewCommand implements Command {
 			CIMSTool.isPrintAll = true;
 			System.out.println("\nCoffee Product information: ");
 			System.out.println("ID\tName\t\t\tQuantity\tOther Info");
-			for (CoffeeProduct cp : products) {
+			for (CoffeeProduct cp : undoProducts) {
 				System.out.println(cp.toString());
 			}
 		} else {
 			CIMSTool.isPrintAll = false;
-			for (CoffeeProduct cp : products) {
+			for (CoffeeProduct cp : undoProducts) {
 				if (cp.getProductID() == Integer.parseInt(in)) {
 					System.out.println("\nProuct information: ");
 					System.out.println(cp.toString());

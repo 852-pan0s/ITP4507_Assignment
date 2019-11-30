@@ -1,7 +1,6 @@
 package cims.command;
 
 import java.util.Stack;
-import java.util.Vector;
 
 import cims.CoffeeProduct;
 import cims.memento.Memento;
@@ -13,11 +12,9 @@ public class UndoCommand implements Command {
 	private Stack<Memento> redoStatus;
 	private Stack<CoffeeProduct> undoProducts;
 	private Stack<CoffeeProduct> redoProducts;
-	private Vector<CoffeeProduct> products;
 
 	public UndoCommand(Stack<String> undoList, Stack<String> redoList, Stack<Memento> undoStatus,
-			Stack<Memento> redoStatus, Stack<CoffeeProduct> undoProducts, Stack<CoffeeProduct> redoProducts,
-			Vector<CoffeeProduct> products) {
+			Stack<Memento> redoStatus, Stack<CoffeeProduct> undoProducts, Stack<CoffeeProduct> redoProducts) {
 		super();
 		this.undoList = undoList;
 		this.redoList = redoList;
@@ -25,7 +22,6 @@ public class UndoCommand implements Command {
 		this.redoStatus = redoStatus;
 		this.undoProducts = undoProducts;
 		this.redoProducts = redoProducts;
-		this.products = products;
 	}
 
 	@Override
@@ -37,11 +33,10 @@ public class UndoCommand implements Command {
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
-		if (undoList.size()>0) {
+		if (undoList.size() > 0) {
 			redoList.push(undoList.pop());
 			if (redoList.peek().contains("Added")) {
 				redoProducts.push(undoProducts.pop());
-				products.remove(redoProducts.peek());
 			} else {
 				redoStatus.push(undoStatus.pop());
 				for (int i = undoStatus.size() - 1; i >= 0; i--) {

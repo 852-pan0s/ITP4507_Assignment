@@ -1,7 +1,6 @@
 package cims.command;
 
 import java.util.Stack;
-import java.util.Vector;
 
 import cims.CoffeeProduct;
 import cims.memento.Memento;
@@ -13,11 +12,9 @@ public class RedoCommand implements Command {
 	private Stack<Memento> redoStatus;
 	private Stack<CoffeeProduct> undoProducts;
 	private Stack<CoffeeProduct> redoProducts;
-	private Vector<CoffeeProduct> products;
 
 	public RedoCommand(Stack<String> undoList, Stack<String> redoList, Stack<Memento> undoStatus,
-			Stack<Memento> redoStatus, Stack<CoffeeProduct> undoProducts, Stack<CoffeeProduct> redoProducts,
-			Vector<CoffeeProduct> products) {
+			Stack<Memento> redoStatus, Stack<CoffeeProduct> undoProducts, Stack<CoffeeProduct> redoProducts) {
 		super();
 		this.undoList = undoList;
 		this.redoList = redoList;
@@ -25,7 +22,6 @@ public class RedoCommand implements Command {
 		this.redoStatus = redoStatus;
 		this.undoProducts = undoProducts;
 		this.redoProducts = redoProducts;
-		this.products = products;
 	}
 
 	@Override
@@ -49,13 +45,12 @@ public class RedoCommand implements Command {
 
 			if (undoList.peek().contains("Added")) {
 				undoProducts.push(redoProducts.pop());
-				products.add(undoProducts.peek());
 			} else {
 				undoStatus.push(redoStatus.pop());
 				undoStatus.peek().restore();
 			}
 			System.out.println("redo completed.");
-		}else {
+		} else {
 			System.out.println("redo fail. (Redo list is empty)");
 		}
 	}

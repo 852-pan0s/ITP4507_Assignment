@@ -2,7 +2,6 @@ package cims.command;
 
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.Vector;
 
 import cims.CoffeeProduct;
 import cims.factory.*;
@@ -13,16 +12,14 @@ public class AddCommand implements Command {
 	private Stack<String> undoList;
 	private Stack<Memento> undoStatus;
 	private Stack<CoffeeProduct> undoProducts;
-	private Vector<CoffeeProduct> products;
 	private Scanner sc;
 
 	public AddCommand(Stack<String> undoList, Stack<Memento> undoStatus, Stack<CoffeeProduct> undoProducts,
-			Vector<CoffeeProduct> products, Scanner sc) {
+			Scanner sc) {
 		super();
 		this.undoList = undoList;
 		this.undoStatus = undoStatus;
 		this.undoProducts = undoProducts;
-		this.products = products;
 		this.sc = sc;
 	}
 
@@ -39,15 +36,13 @@ public class AddCommand implements Command {
 			cf = new CoffeePowderCreator(sc);
 		} else if (in.equals("cm")) {
 			cf = new CoffeeMugCreator(sc);
-		}
-		else {
+		} else {
 			System.out.println("No such type");
 			return;
 		}
 		CoffeeProduct cp = cf.create();
 		undoProducts.push(cp);
 		undoStatus.push(new Memento(cp));
-		products.add(cp);
 		undoList.push(String.format("Added %d %s", cp.getProductID(), cp.getName()));
 		System.out.println("New product record created.");
 
