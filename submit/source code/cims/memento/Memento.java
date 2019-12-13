@@ -25,7 +25,7 @@ public class Memento {
 		return cp;
 	}
 
-//	public int getQty() {
-//		return qty;
-//	}
+	public int getQty() {
+		return qty;
+	}
 }

@@ -6,6 +6,7 @@ import cims.CoffeeProduct;
 import cims.memento.Memento;
 
 public class UndoCommand implements Command {
+
 	private Stack<String> undoList;
 	private Stack<String> redoList;
 	private Stack<Memento> undoStatus;
@@ -33,6 +34,7 @@ public class UndoCommand implements Command {
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
+
 		if (undoList.size() > 0) {
 			redoList.push(undoList.pop());
 			if (redoList.peek().contains("Added")) {

@@ -12,11 +12,7 @@ public class CoffeeMug extends CoffeeProduct {
 
 	@Override
 	public String toString() {
-		if (CIMSTool.isPrintAll) {
-			return super.toString() + String.format("\t\t%s (%.0fg)  ", size, weigth);
-		} else {
-			return super.toString() + String.format("\nSize: %s\nWeigth: %.0fg", size, weigth);
-		}
+		return super.toString() + String.format("\nSize: %s\nWeigth: %.0fg", size, weigth);
 	}
 
 	public String getSize() {

@@ -17,11 +17,7 @@ public class CoffeePowder extends CoffeeProduct {
 	}
 
 	public String toString() {
-		if (CIMSTool.isPrintAll) {
-			return super.toString() + String.format("\t\t%.0fg", weight);
-		} else {
-			return super.toString() + String.format("\nWeight: %.0fg", weight);
-		}
+		return super.toString() + String.format("\nWeight: %.0fg", weight);
 
 	}
 }

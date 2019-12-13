@@ -27,13 +27,8 @@ public class CoffeeCandy extends CoffeeProduct {
 	}
 
 	public String toString() {
-		if (CIMSTool.isPrintAll) {
-			return super.toString()
-					+ String.format("\t\t%d candy per package (%d calories each) ", noOfCandy, caloriesPerCandy);
-		} else {
-			return super.toString() + String.format("\nNumber of candies per package: %d\nCalories Per candy: %d",
-					noOfCandy, caloriesPerCandy);
-		}
+		return super.toString() + String.format("\nNumber of candies per package: %d\nCalories Per candy: %d",
+				noOfCandy, caloriesPerCandy);
 	}
 
 }

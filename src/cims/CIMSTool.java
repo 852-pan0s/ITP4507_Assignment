@@ -54,6 +54,4 @@ public class CIMSTool {
 		System.out.println("Thanks for using Coffee Inventory Management System!! ");
 	}
 
-	public static boolean isPrintAll = false;
-
 }
