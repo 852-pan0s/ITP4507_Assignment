@@ -23,9 +23,9 @@ public class ShipCommand implements Command {
 				in = c.getSc().nextLine();
 				if (cp.getQty() >= Integer.parseInt(in)) {
 					cp.setQty(cp.getQty() - Integer.parseInt(in));
-//					c.getUndoStatus().push(new Memento(cp));
+					//save the status of product
 					c.saveStatus(new Memento(cp));
-//					c.getUndoList().push(String.format("Shipped %s %s (%d) ", in, cp.getName(), cp.getProductID()));
+					//save the record
 					c.saveRecord(String.format("Shipped %s %s (%d) ", in, cp.getName(), cp.getProductID()));
 					System.out.println(String.format("Shipped %s packs of %s. Current quantity is %d.", in,
 							cp.getName(), cp.getQty()));

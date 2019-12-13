@@ -26,6 +26,7 @@ public class CoffeeCandy extends CoffeeProduct {
 		this.caloriesPerCandy = caloriesPerCandy;
 	}
 
+	@Override
 	public String toString() {
 		return super.toString() + String.format("\nNumber of candies per package: %d\nCalories Per candy: %d",
 				noOfCandy, caloriesPerCandy);

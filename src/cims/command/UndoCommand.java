@@ -27,10 +27,9 @@ public class UndoCommand implements Command {
 				c.getRedoProducts().push(c.getUndoProducts().pop());
 			} else {
 				c.getRedoStatus().push(c.getUndoStatus().pop());
+				int productID = c.getRedoStatus().peek().getCoffeeProduct().getProductID();
 				for (int i = c.getUndoStatus().size() - 1; i >= 0; i--) {
-//				System.out.println("Debug:"+c.getUndoStatus().get(i).getCoffeeProduct().getProductID()+",qty:"+c.getUndoStatus().get(i).getQty());
-					if (c.getUndoStatus().get(i).getCoffeeProduct().getProductID() == c.getRedoStatus().peek().getCoffeeProduct()
-							.getProductID()) {
+					if (c.getUndoStatus().get(i).getCoffeeProduct().getProductID() == productID) {
 						c.getUndoStatus().get(i).restore();
 						break;
 					}

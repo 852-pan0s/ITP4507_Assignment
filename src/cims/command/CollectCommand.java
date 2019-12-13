@@ -22,9 +22,8 @@ public class CollectCommand implements Command {
 				System.out.println("Quantity of deposit:");
 				in = c.getSc().nextLine();
 				cp.setQty(cp.getQty() + Integer.parseInt(in));
-//				c.getUndoStatus().push(new Memento(cp));
+				//save the action.
 				c.saveStatus(new Memento(cp));
-//				c.getUndoList().push(String.format("Received %s %s (%d) ", in, cp.getName(), cp.getProductID()));
 				c.saveRecord(String.format("Received %s %s (%d) ", in, cp.getName(), cp.getProductID()));
 				System.out.println(String.format("Received %s packs of %s. Current quantity is %d.", in, cp.getName(),
 						cp.getQty()));

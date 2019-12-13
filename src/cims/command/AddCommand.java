@@ -11,7 +11,7 @@ public class AddCommand implements Command {
 
 	public AddCommand(Caretaker c) {
 		super();
-		 this.c = c;
+		this.c = c;
 	}
 
 	@Override
@@ -32,11 +32,9 @@ public class AddCommand implements Command {
 			return;
 		}
 		CoffeeProduct cp = cf.create();
-//		c.getUndoProducts().push(cp);
-		c.saveProducts(cp);
-//		c.getUndoStatus().push(new Memento(cp));
+		// save the action.
+		c.saveProduct(cp);
 		c.saveStatus(new Memento(cp));
-//		c.getUndoList().push(String.format("Added %d %s", cp.getProductID(), cp.getName()));
 		c.saveRecord(String.format("Added %d %s", cp.getProductID(), cp.getName()));
 		System.out.println("New product record created.");
 

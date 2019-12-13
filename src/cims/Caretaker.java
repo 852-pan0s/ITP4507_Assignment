@@ -103,7 +103,7 @@ public class Caretaker {
 		undoStatus.push(m);
 	}
 	
-	public void saveProducts(CoffeeProduct cp) {
+	public void saveProduct(CoffeeProduct cp) {
 		undoProducts.push(cp);
 	}
 	

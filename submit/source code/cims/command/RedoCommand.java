@@ -1,27 +1,13 @@
 package cims.command;
 
-import java.util.Stack;
-
-import cims.CoffeeProduct;
-import cims.memento.Memento;
+import cims.Caretaker;
 
 public class RedoCommand implements Command {
-	private Stack<String> undoList;
-	private Stack<String> redoList;
-	private Stack<Memento> undoStatus;
-	private Stack<Memento> redoStatus;
-	private Stack<CoffeeProduct> undoProducts;
-	private Stack<CoffeeProduct> redoProducts;
+	private Caretaker c;
 
-	public RedoCommand(Stack<String> undoList, Stack<String> redoList, Stack<Memento> undoStatus,
-			Stack<Memento> redoStatus, Stack<CoffeeProduct> undoProducts, Stack<CoffeeProduct> redoProducts) {
+	public RedoCommand(Caretaker c) {
 		super();
-		this.undoList = undoList;
-		this.redoList = redoList;
-		this.undoStatus = undoStatus;
-		this.redoStatus = redoStatus;
-		this.undoProducts = undoProducts;
-		this.redoProducts = redoProducts;
+		 this.c = c;
 	}
 
 	@Override
@@ -39,15 +25,19 @@ public class RedoCommand implements Command {
 	@Override
 	public void redo() {
 		// TODO Auto-generated method stub
-		if (redoList.size() > 0) {
+		if (c.getRedoList().size() > 0) {
 
-			undoList.push(redoList.pop());
+			c.getUndoList().push(c.getRedoList().pop());
 
-			if (undoList.peek().contains("Added")) {
-				undoProducts.push(redoProducts.pop());
+			if (c.getUndoList().peek().contains("Added")) {
+				//save the action.
+				c.saveProduct(c.getRedoProducts().pop());
 			} else {
-				undoStatus.push(redoStatus.pop());
-				undoStatus.peek().restore();
+				//save the action.
+				c.saveStatus(c.getRedoStatus().pop());
+				//restore the status of product
+				c.getUndoStatus().peek().restore();
+				
 			}
 			System.out.println("redo completed.");
 		} else {

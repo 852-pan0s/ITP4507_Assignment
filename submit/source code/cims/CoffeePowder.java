@@ -16,6 +16,7 @@ public class CoffeePowder extends CoffeeProduct {
 		this.weight = weight;
 	}
 
+	@Override
 	public String toString() {
 		return super.toString() + String.format("\nWeight: %.0fg", weight);
 

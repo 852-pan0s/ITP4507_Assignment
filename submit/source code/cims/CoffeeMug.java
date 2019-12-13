@@ -10,11 +10,6 @@ public class CoffeeMug extends CoffeeProduct {
 		this.weigth = weigth;
 	}
 
-	@Override
-	public String toString() {
-		return super.toString() + String.format("\nSize: %s\nWeigth: %.0fg", size, weigth);
-	}
-
 	public String getSize() {
 		return size;
 	}
@@ -29,6 +24,11 @@ public class CoffeeMug extends CoffeeProduct {
 
 	public void setWeigth(double weigth) {
 		this.weigth = weigth;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + String.format("\nSize: %s\nWeigth: %.0fg", size, weigth);
 	}
 
 }

@@ -15,7 +15,7 @@ public class CoffeeMugCreator extends CoffeeFactory {
 	@Override
 	public CoffeeProduct create() {
 		// TODO Auto-generated method stub
-		System.out.println("Enter product Id, name, size and weight:");
+		System.out.println("Enter product Id, name, size, weight:");
 		String[] in = sc.nextLine().split(", ");
 //		for (String s : in) {
 //			System.out.println(s);

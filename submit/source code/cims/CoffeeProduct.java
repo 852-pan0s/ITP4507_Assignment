@@ -11,11 +11,6 @@ public class CoffeeProduct {
 		this.productID = productID;
 	}
 
-	public String toString() {
-		String s = String.format("ID: %d\nName: %s\nQuantity: %d", productID, name, qty);
-		return s;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -39,5 +34,11 @@ public class CoffeeProduct {
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("ID: %d\nName: %s\nQuantity: %d", productID, name, qty);
+	}
+
 
 }

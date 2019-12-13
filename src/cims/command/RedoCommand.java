@@ -30,11 +30,12 @@ public class RedoCommand implements Command {
 			c.getUndoList().push(c.getRedoList().pop());
 
 			if (c.getUndoList().peek().contains("Added")) {
-//				c.getUndoProducts().push(c.getRedoProducts().pop());
-				c.saveProducts(c.getRedoProducts().pop());
+				//save the action.
+				c.saveProduct(c.getRedoProducts().pop());
 			} else {
-//				c.getUndoStatus().push(c.getRedoStatus().pop());
+				//save the action.
 				c.saveStatus(c.getRedoStatus().pop());
+				//restore the status of product
 				c.getUndoStatus().peek().restore();
 				
 			}

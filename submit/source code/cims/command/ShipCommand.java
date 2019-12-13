@@ -1,39 +1,32 @@
 package cims.command;
 
-import java.util.Scanner;
-import java.util.Stack;
-
+import cims.Caretaker;
 import cims.CoffeeProduct;
 import cims.memento.Memento;
 
 public class ShipCommand implements Command {
-	private Stack<String> undoList;
-	private Stack<Memento> undoStatus;
-	private Stack<CoffeeProduct> undoProducts;
-	private Scanner sc;
+	private Caretaker c;
 
-	public ShipCommand(Stack<String> undoList, Stack<Memento> undoStatus, Stack<CoffeeProduct> undoProducts,
-			Scanner sc) {
+	public ShipCommand(Caretaker c) {
 		super();
-		this.undoList = undoList;
-		this.undoStatus = undoStatus;
-		this.undoProducts = undoProducts;
-		this.sc = sc;
+		 this.c = c;
 	}
 
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
 		System.out.println("Enter code:");
-		String in = sc.nextLine();
-		for (CoffeeProduct cp : undoProducts) {
+		String in = c.getSc().nextLine();
+		for (CoffeeProduct cp : c.getUndoProducts()) {
 			if (cp.getProductID() == Integer.parseInt(in)) {
 				System.out.println("Quantity to ship:");
-				in = sc.nextLine();
+				in = c.getSc().nextLine();
 				if (cp.getQty() >= Integer.parseInt(in)) {
 					cp.setQty(cp.getQty() - Integer.parseInt(in));
-					undoStatus.push(new Memento(cp));
-					undoList.push(String.format("Shipped %s %s (%d) ", in, cp.getName(), cp.getProductID()));
+					//save the status of product
+					c.saveStatus(new Memento(cp));
+					//save the record
+					c.saveRecord(String.format("Shipped %s %s (%d) ", in, cp.getName(), cp.getProductID()));
 					System.out.println(String.format("Shipped %s packs of %s. Current quantity is %d.", in,
 							cp.getName(), cp.getQty()));
 					break;
