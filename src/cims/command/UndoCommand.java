@@ -1,28 +1,14 @@
 package cims.command;
 
-import java.util.Stack;
-
-import cims.CoffeeProduct;
-import cims.memento.Memento;
+import cims.Caretaker;
 
 public class UndoCommand implements Command {
 
-	private Stack<String> undoList;
-	private Stack<String> redoList;
-	private Stack<Memento> undoStatus;
-	private Stack<Memento> redoStatus;
-	private Stack<CoffeeProduct> undoProducts;
-	private Stack<CoffeeProduct> redoProducts;
+	private Caretaker c;
 
-	public UndoCommand(Stack<String> undoList, Stack<String> redoList, Stack<Memento> undoStatus,
-			Stack<Memento> redoStatus, Stack<CoffeeProduct> undoProducts, Stack<CoffeeProduct> redoProducts) {
+	public UndoCommand(Caretaker c) {
 		super();
-		this.undoList = undoList;
-		this.redoList = redoList;
-		this.undoStatus = undoStatus;
-		this.redoStatus = redoStatus;
-		this.undoProducts = undoProducts;
-		this.redoProducts = redoProducts;
+		 this.c = c;
 	}
 
 	@Override
@@ -35,17 +21,17 @@ public class UndoCommand implements Command {
 	public void undo() {
 		// TODO Auto-generated method stub
 
-		if (undoList.size() > 0) {
-			redoList.push(undoList.pop());
-			if (redoList.peek().contains("Added")) {
-				redoProducts.push(undoProducts.pop());
+		if (c.getUndoList().size() > 0) {
+			c.getRedoList().push(c.getUndoList().pop());
+			if (c.getRedoList().peek().contains("Added")) {
+				c.getRedoProducts().push(c.getUndoProducts().pop());
 			} else {
-				redoStatus.push(undoStatus.pop());
-				for (int i = undoStatus.size() - 1; i >= 0; i--) {
-//				System.out.println("Debug:"+undoStatus.get(i).getCoffeeProduct().getProductID()+",qty:"+undoStatus.get(i).getQty());
-					if (undoStatus.get(i).getCoffeeProduct().getProductID() == redoStatus.peek().getCoffeeProduct()
+				c.getRedoStatus().push(c.getUndoStatus().pop());
+				for (int i = c.getUndoStatus().size() - 1; i >= 0; i--) {
+//				System.out.println("Debug:"+c.getUndoStatus().get(i).getCoffeeProduct().getProductID()+",qty:"+c.getUndoStatus().get(i).getQty());
+					if (c.getUndoStatus().get(i).getCoffeeProduct().getProductID() == c.getRedoStatus().peek().getCoffeeProduct()
 							.getProductID()) {
-						undoStatus.get(i).restore();
+						c.getUndoStatus().get(i).restore();
 						break;
 					}
 				}

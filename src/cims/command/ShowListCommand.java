@@ -1,24 +1,22 @@
 package cims.command;
 
-import java.util.Stack;
+import cims.Caretaker;
 
 public class ShowListCommand implements Command {
 
-	private Stack<String> undoList;
-	private Stack<String> redoList;
+	private Caretaker c;
 
-	public ShowListCommand(Stack<String> undoList, Stack<String> redoList) {
+	public ShowListCommand(Caretaker c) {
 		super();
-		this.undoList = undoList;
-		this.redoList = redoList;
+		 this.c = c;
 	}
 
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
 		System.out.println("\nUndo List");
-		if (undoList.size() > 0) {
-			for (String s : undoList) {
+		if (c.getUndoList().size() > 0) {
+			for (String s : c.getUndoList()) {
 				System.out.println(s);
 			}
 		} else {
@@ -26,8 +24,8 @@ public class ShowListCommand implements Command {
 		}
 
 		System.out.println("\nRedo List");
-		if (redoList.size() > 0) {
-			for (String s : redoList) {
+		if (c.getRedoList().size() > 0) {
+			for (String s : c.getRedoList()) {
 				System.out.println(s);
 			}
 		} else {

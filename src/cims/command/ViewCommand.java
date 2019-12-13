@@ -1,30 +1,25 @@
 package cims.command;
 
-import java.util.Scanner;
-import java.util.Stack;
-
 import cims.*;
 
 public class ViewCommand implements Command {
 
-	private Stack<CoffeeProduct> undoProducts;
-	private Scanner sc;
+	private Caretaker c;
 
-	public ViewCommand(Stack<CoffeeProduct> undoProducts, Scanner sc) {
+	public ViewCommand(Caretaker c) {
 		super();
-		this.undoProducts = undoProducts;
-		this.sc = sc;
+		 this.c = c;
 	}
 
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
 		System.out.println("Enter product Id. (* to show all): ");
-		String in = sc.nextLine();
+		String in = c.getSc().nextLine();
 		if (in.equals("*")) {
 			System.out.println("\nCoffee Product information: ");
 			System.out.println("ID\tName\t\t\tQuantity\tOther Info");
-			for (CoffeeProduct cp : undoProducts) {
+			for (CoffeeProduct cp : c.getUndoProducts()) {
 				String s = "";
 				String t = cp.getName().length() > 15 ? "\t" : "\t\t";
 				s = String.format("%d\t%s%s%d", cp.getProductID(), cp.getName(), t,cp.getQty());
@@ -41,7 +36,7 @@ public class ViewCommand implements Command {
 				System.out.println(s);
 			}
 		} else {
-			for (CoffeeProduct cp : undoProducts) {
+			for (CoffeeProduct cp : c.getUndoProducts()) {
 				if (cp.getProductID() == Integer.parseInt(in)) {
 					System.out.println("\nProuct information: ");
 					System.out.println(cp.toString());
